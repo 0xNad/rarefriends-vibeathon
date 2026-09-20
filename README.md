@@ -8,7 +8,7 @@
 
 ### Games using FriendSDK
 
-Use [FriendSDK v0.1.1](https://github.com/spokesz/friendsdk) when its game runtime fits your idea.
+Use [FriendSDK v0.1.2](https://github.com/spokesz/friendsdk) when its game runtime fits your idea.
 
 - **Make your selected Rare Friend part of the experience** and preserve its original character artwork.
 - **Use the SDK's wallet and Friend selection.** Builders and players need a wallet holding a hardwired Generations NFT, generation 1 or higher, on Robinhood mainnet—even for previews.
