@@ -30,11 +30,12 @@ Use the [Fishing example submission](https://github.com/spokesz/rarefriends-vibe
 
 - **Project name, builder name/contact and category.**
 - **One sentence** explaining the project and how it uses Rare Friends or $RAREFRIENDS.
-- **Source repository** with code, assets and clear setup and run instructions. State whether you use FriendSDK and its version, or name your stack. Include a playable preview or working demo link if available.
+- **Source repository** with code, assets and clear setup and run instructions. State whether you use FriendSDK and its version, or name your stack.
+- **Playable preview or demo.** Games must include a public playable preview link; web tools and agents must include a working demo link. For CLI tools or background agents without a web interface, include a reproducible demo command and a short recording or example output. State any wallet and network requirements.
 - **How to use it.** Describe controls and game rules, or the steps to try your tool, agent or other project. If applicable, list RF costs, outcome probabilities, rewards and consumable rules. Credit any third-party assets.
 - **Checks and known issues.** For SDK games, run relevant tests, typecheck, game validation and browser checks. For other projects, report checks appropriate to the stack and main interaction. Report failures, limitations and any known risks involving wallets or funds.
 
-Submit early and improve your entry during the event. **You are welcome to deploy and share playable previews and working demos.** Production publication through Rare Friends requires a separate review.
+Submit early and improve your entry during the event. **You may host public playable previews and working demos on GitHub Pages or another static host. No separate Rare Friends approval is needed for submission previews.** For SDK games, follow the [build and hosting steps](https://github.com/spokesz/friendsdk#build-and-share-a-preview), keeping the ownership gate and simulated economy intact. Official production publication through Rare Friends still requires a separate review.
 
 Need help choosing an approach or submitting? Join [Vibeathon support on Telegram](https://t.me/RFVibeathon).
 
