@@ -62,9 +62,48 @@ through the SDK's public, wallet-free artwork APIs.
 | `frames(family, seed)` | The canonical 16×16 sprite, drawn unmodified at an integer scale |
 
 Across 27,000 generated family/seed combinations the composer produced 27,000
-distinct songs. The Friend's traits change **only what the music sounds like** —
-never the odds, never a reward, never the published terms, which are global and
-fixed for every player.
+distinct songs. Every refrain resolves onto the tonic and spans at least three
+semitones, so no Friend is handed a monotone payoff phrase. The Friend's traits
+change **only what the music sounds like** — never the odds, never a reward,
+never the published terms, which are global and fixed for every player.
+
+### Verified against the live chain
+
+Artwork and trait reads are public view/pure functions, so this needs no wallet,
+key or signature. `npm run verify:live` reads real Friends from Robinhood mainnet
+and composes their real songs; `npm run artifact:friends` renders this sheet.
+
+![Seven real mainnet Friends and their voices](media/real-friends.png)
+
+Seven real, minted, generation ≥ 1 Friends covering seven of the nine families,
+each with its genuine on-chain sprite and its own composed song:
+
+| Friend | Family | Voice | Key / tempo |
+| --- | --- | --- | --- |
+| #444 | Skeleton | Bone flute | A @ 85 BPM |
+| #87846 | Mask | Masked reed | C# @ 100 BPM |
+| #40000 | Family | Hearth chime | F @ 99 BPM |
+| #65001 | Cellular | Cell pulse | E @ 121 BPM |
+| #15000 | Asymmetry | Skew string | G# @ 99 BPM |
+| #7730 | Hoverer | Hover glass | D @ 77 BPM |
+| #20838 | Colossus | Colossus horn | B @ 59 BPM |
+
+The check fails if any two real Friends compose the same song, if any note falls
+outside the audible band, or if any Friend would render no pixels.
+
+**Friend #7730, the SDK's automated fixture Friend, is itself a real minted
+mainnet token** (Hoverer, seed 7730), and the SDK's recorded sample frames are
+byte-identical to the live registry's. The screenshots here therefore show a real
+Friend's real artwork playing its real song; only the wallet and the ownership
+check are mocked.
+
+Two defects surfaced only because this ran against real tokens. Real Friend #444
+refrained as `A3 A3 A3 B3 B3 B3 A3`, because some seeds draw a near-static motif —
+the motif is now redrawn deterministically until it moves. And reading
+`clips.idle.down` directly reported zero pixels for Colossus, whose vertical
+facings are intentionally empty; the game already resolved frames through
+`spriteFrame`, which falls back to the side view, so real Colossus Friend #20838
+draws correctly, but the verification script did not and now does.
 
 This also answers the SDK's no-persistence constraint rather than working around
 it: because the song is a pure function of chain data, it is recomputed identically
@@ -159,6 +198,8 @@ a 240 px-tall strip.
 | FriendSDK `npm test` (v0.1.2 checkout) | 116 tests, 114 pass, 0 fail, 2 skipped |
 | `tsc --noEmit` | clean |
 | Pages deploy | succeeded; preview boots with the ownership gate and no console errors |
+| `npm run verify:live` | 8 real token IDs read from mainnet; 8/8 distinct songs, all in range, none blank |
+| Fixture frames vs live chain | byte-identical for Friend #7730 |
 
 The browser check (`npm run verify`) drives the real runtime in headless Chromium
 with the SDK's read-only wallet/RPC fixtures, asserting that the canonical artwork
@@ -174,12 +215,13 @@ skips when Foundry is unavailable.
 
 **Known issues and limitations**
 
-- **Not yet verified with a real wallet.** Everything above was verified through
-  the SDK's automated fixtures and by loading the deployed preview, which reaches
-  and renders the genuine ownership gate. A playtest by an eligible Friend holder
-  has not been done yet, so real-wallet Friend selection, live artwork reads for an
-  arbitrary token, and phone wallet-browser behaviour remain unconfirmed. This will
-  be exercised and the entry updated during the event.
+- **No holder playtest yet.** Live artwork and trait reads *are* verified against
+  mainnet for seven real Friends across seven families, and the deployed preview
+  is confirmed to boot and render the genuine ownership gate. What remains
+  unconfirmed is anything that needs a wallet actually holding an eligible NFT:
+  **real-wallet Friend selection through the SDK picker, and behaviour inside a
+  phone wallet browser.** Those two will be exercised and the entry updated during
+  the event. No claim is made about them here.
 - **No persistence.** The SDK sandbox has no storage and the bridge has no save
   API, so held phrases and Resonance last one runtime session. The song itself is
   unaffected — it is recomputed from chain data every time.
