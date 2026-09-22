@@ -230,7 +230,7 @@ a 240 px-tall strip.
 | Browser check @ 360 px | pass |
 | Echo scoring played in time | 4/4 matched, phrase mastered |
 | FriendSDK `npm test` (v0.1.2 checkout) | 116 tests, 114 pass, 0 fail, 2 skipped |
-| `tsc --noEmit` | clean |
+| `tsc` on the game sources | clean, `strict` with `exactOptionalPropertyTypes` |
 | Pages deploy | succeeded; preview boots with the ownership gate and no console errors |
 | `npm run verify:live` | 8 real token IDs read from mainnet; 8/8 distinct songs, all in range, none blank |
 | Fixture frames vs live chain | byte-identical for Friend #7730 |
