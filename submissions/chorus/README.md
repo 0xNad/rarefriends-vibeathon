@@ -111,6 +111,12 @@ independently from mainnet returns family 4 Asymmetry, seed 1969, generation 1,
 composing **Skew string in E at 88 BPM** — an exact match, on a Friend outside
 the set used to build or test the composer.
 
+![Buying a Tone with a real wallet connected](media/holder-buy-1969.png)
+
+The economy path with the same wallet: the SDK's trusted confirmation, labelled
+`Simulated RF. No transaction will be sent.`, and the HUD down to **18 RF for
+2 Tones** — exactly the published 1 RF price, with nothing signed.
+
 Two defects surfaced only because this ran against real tokens. Real Friend #444
 refrained as `A3 A3 A3 B3 B3 B3 A3`, because some seeds draw a near-static motif —
 the motif is now redrawn deterministically until it moves. And reading
@@ -154,6 +160,10 @@ contracts and signs nothing.
 **How to use it**
 
 1. **Buy Tone** — 1 simulated RF, confirmed in the SDK's trusted frame.
+   **Buy 5** takes five for 5 RF under a single confirmation: every economy action
+   is a trusted prompt, so filling the rail one Tone at a time is tedious. The pack
+   honours the same reserve rule, so it appears only when the game holds free
+   backing for all five.
 2. **Capture a phrase** — spends the Tone, draws one phrase from the table below,
    and plays it.
 3. **Echo it** — tap the pad or press **Space** once per note, within ±160 ms.
@@ -215,6 +225,7 @@ a 240 px-tall strip.
 | `npm run verify:live` | 8 real token IDs read from mainnet; 8/8 distinct songs, all in range, none blank |
 | Fixture frames vs live chain | byte-identical for Friend #7730 |
 | Real wallet, holder-owned Friend #1969 | ownership gate passed, artwork rendered, composed identity matches chain |
+| Real wallet purchase | trusted confirmation shown, labelled simulated, 20 RF → 18 RF for 2 Tones |
 
 The browser check (`npm run verify`) drives the real runtime in headless Chromium
 with the SDK's read-only wallet/RPC fixtures, asserting that the canonical artwork
@@ -230,15 +241,15 @@ skips when Foundry is unavailable.
 
 **Known issues and limitations**
 
-- **Holder verification covers selection, not the full loop on a desktop wallet.**
-  A real wallet on Robinhood mainnet passed the ownership gate and selected
-  holder-owned Friend #1969, whose artwork and composed identity match an
-  independent chain read (see above). That session was freshly loaded, so
-  **the buy → capture → echo → redeem loop has not been exercised with a wallet
-  connected** — the automated browser check covers it against the real runtime
-  instead — and **behaviour inside a phone wallet browser is still unconfirmed.**
-  Both will be exercised and the entry updated during the event; no claim is made
-  about them here.
+- **Holder verification covers selection and purchase, on desktop only.** A real
+  wallet on Robinhood mainnet passed the ownership gate, selected holder-owned
+  Friend #1969 — whose artwork and composed identity match an independent chain
+  read — and bought Tones through the SDK's trusted confirmation, with the HUD
+  matching the published price. What is **not** yet exercised with a wallet
+  connected is **capture, echo, play and redeem**; the automated browser check
+  covers those against the real runtime instead. **Behaviour inside a phone wallet
+  browser is also still unconfirmed.** Both will be exercised and the entry
+  updated during the event; no claim is made about them here.
 - **No persistence.** The SDK sandbox has no storage and the bridge has no save
   API, so held phrases and Resonance last one runtime session. The song itself is
   unaffected — it is recomputed from chain data every time.
