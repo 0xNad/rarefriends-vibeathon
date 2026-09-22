@@ -153,6 +153,18 @@ npm install
 npm run dev        # or: npm run dev:lan   to play from a phone
 ```
 
+**Demo video**
+
+[**60-second demo (mp4, with sound)**](media/chorus-demo.mp4) — buy a pack,
+capture phrases, echo one in time, then play the whole arrangement.
+
+Recorded from the real runtime. Playwright records video but never audio, so
+the page's own audio graph is tapped and captured with `MediaRecorder`: the
+soundtrack is the game's actual output, not a reproduction rendered separately.
+Wallet and ownership are the SDK's read-only test fixtures; Friend #7730 is a
+real mainnet token whose recorded frames match the live registry. Reproduce it
+with `npm run demo`.
+
 **Playable preview**
 
 **https://0xnad.github.io/chorus-rarefriends/**
