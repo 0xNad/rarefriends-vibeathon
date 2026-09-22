@@ -237,6 +237,7 @@ a 240 px-tall strip.
 | Real wallet, holder-owned Friend #1969 | ownership gate passed, artwork rendered, composed identity matches chain |
 | Real wallet purchase | trusted confirmation shown, labelled simulated, 20 RF → 18 RF for 2 Tones |
 | Real wallet capture + echo | 2 phrases held; Resonance 10 matches `round((1/6) × 60)` for #1969's 6-note Descant |
+| Real wallet redeem, phone wallet browser | builder-reported; no captured artifact |
 
 The browser check (`npm run verify`) drives the real runtime in headless Chromium
 with the SDK's read-only wallet/RPC fixtures, asserting that the canonical artwork
@@ -252,16 +253,15 @@ skips when Foundry is unavailable.
 
 **Known issues and limitations**
 
-- **Holder verification is desktop only, and stops short of redeem.** A real
-  wallet on Robinhood mainnet passed the ownership gate, selected holder-owned
-  Friend #1969 — whose artwork and composed identity match an independent chain
-  read — bought Tones through the SDK's trusted confirmation at the published
-  price, captured two phrases, and scored an echo whose Resonance is derivable
-  from the composition. What is **not** yet exercised with a wallet connected is
-  **redeem**, and **behaviour inside a phone wallet browser is still
-  unconfirmed.** The automated browser check covers redeem against the real
-  runtime. Both will be exercised and the entry updated during the event; no
-  claim is made about them here.
+- **Two holder checks are builder-reported rather than evidenced.** The
+  screenshots above cover selection, purchase, capture and echo on a real wallet,
+  and their strongest parts are independently verifiable: the composed identity
+  matches a chain read, and the Resonance figure is derivable from the
+  composition. **Redeem and the phone wallet browser were confirmed by the builder
+  on a real wallet without a captured artifact**, so they are recorded here as
+  builder-reported and carry less weight than the rest. The automated browser
+  check covers redeem against the real runtime, and the portrait layout is
+  exercised at 360 px on every run.
 - **No persistence.** The SDK sandbox has no storage and the bridge has no save
   API, so held phrases and Resonance last one runtime session. The song itself is
   unaffected — it is recomputed from chain data every time.
