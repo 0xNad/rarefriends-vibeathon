@@ -117,6 +117,16 @@ The economy path with the same wallet: the SDK's trusted confirmation, labelled
 `Simulated RF. No transaction will be sent.`, and the HUD down to **18 RF for
 2 Tones** — exactly the published 1 RF price, with nothing signed.
 
+![Echoing a captured phrase with a real wallet connected](media/holder-echo-1969.png)
+
+And the rest of the loop: two phrases captured and held — **Verse IV** and
+**Descant** — a five-note echo in progress, and **Resonance 10**.
+
+That Resonance is independently derivable rather than a screenshot claim.
+#1969's Descant is six notes, and the scoring formula gives a single matched
+note `round((1/6) × 60) = 10` — exactly what the HUD shows. Echo hit detection
+therefore works on real hardware, not only under the automated check.
+
 Two defects surfaced only because this ran against real tokens. Real Friend #444
 refrained as `A3 A3 A3 B3 B3 B3 A3`, because some seeds draw a near-static motif —
 the motif is now redrawn deterministically until it moves. And reading
@@ -226,6 +236,7 @@ a 240 px-tall strip.
 | Fixture frames vs live chain | byte-identical for Friend #7730 |
 | Real wallet, holder-owned Friend #1969 | ownership gate passed, artwork rendered, composed identity matches chain |
 | Real wallet purchase | trusted confirmation shown, labelled simulated, 20 RF → 18 RF for 2 Tones |
+| Real wallet capture + echo | 2 phrases held; Resonance 10 matches `round((1/6) × 60)` for #1969's 6-note Descant |
 
 The browser check (`npm run verify`) drives the real runtime in headless Chromium
 with the SDK's read-only wallet/RPC fixtures, asserting that the canonical artwork
@@ -241,15 +252,16 @@ skips when Foundry is unavailable.
 
 **Known issues and limitations**
 
-- **Holder verification covers selection and purchase, on desktop only.** A real
+- **Holder verification is desktop only, and stops short of redeem.** A real
   wallet on Robinhood mainnet passed the ownership gate, selected holder-owned
   Friend #1969 — whose artwork and composed identity match an independent chain
-  read — and bought Tones through the SDK's trusted confirmation, with the HUD
-  matching the published price. What is **not** yet exercised with a wallet
-  connected is **capture, echo, play and redeem**; the automated browser check
-  covers those against the real runtime instead. **Behaviour inside a phone wallet
-  browser is also still unconfirmed.** Both will be exercised and the entry
-  updated during the event; no claim is made about them here.
+  read — bought Tones through the SDK's trusted confirmation at the published
+  price, captured two phrases, and scored an echo whose Resonance is derivable
+  from the composition. What is **not** yet exercised with a wallet connected is
+  **redeem**, and **behaviour inside a phone wallet browser is still
+  unconfirmed.** The automated browser check covers redeem against the real
+  runtime. Both will be exercised and the entry updated during the event; no
+  claim is made about them here.
 - **No persistence.** The SDK sandbox has no storage and the bridge has no save
   API, so held phrases and Resonance last one runtime session. The song itself is
   unaffected — it is recomputed from chain data every time.
