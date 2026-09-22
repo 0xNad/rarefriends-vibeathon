@@ -97,6 +97,20 @@ byte-identical to the live registry's. The screenshots here therefore show a rea
 Friend's real artwork playing its real song; only the wallet and the ownership
 check are mocked.
 
+### Holder verification
+
+![Chorus running for holder-owned Friend #1969](media/holder-friend-1969.png)
+
+Chorus on the deployed preview with a real browser wallet on Robinhood mainnet,
+for a Friend the player owns. The SDK's fresh ownership gate passed and its
+picker selected **Friend #1969**, whose canonical artwork is drawn from a live
+registry read.
+
+The header reads `Skew string · key E · 88 BPM`. Reading that token
+independently from mainnet returns family 4 Asymmetry, seed 1969, generation 1,
+composing **Skew string in E at 88 BPM** — an exact match, on a Friend outside
+the set used to build or test the composer.
+
 Two defects surfaced only because this ran against real tokens. Real Friend #444
 refrained as `A3 A3 A3 B3 B3 B3 A3`, because some seeds draw a near-static motif —
 the motif is now redrawn deterministically until it moves. And reading
@@ -200,6 +214,7 @@ a 240 px-tall strip.
 | Pages deploy | succeeded; preview boots with the ownership gate and no console errors |
 | `npm run verify:live` | 8 real token IDs read from mainnet; 8/8 distinct songs, all in range, none blank |
 | Fixture frames vs live chain | byte-identical for Friend #7730 |
+| Real wallet, holder-owned Friend #1969 | ownership gate passed, artwork rendered, composed identity matches chain |
 
 The browser check (`npm run verify`) drives the real runtime in headless Chromium
 with the SDK's read-only wallet/RPC fixtures, asserting that the canonical artwork
@@ -215,13 +230,15 @@ skips when Foundry is unavailable.
 
 **Known issues and limitations**
 
-- **No holder playtest yet.** Live artwork and trait reads *are* verified against
-  mainnet for seven real Friends across seven families, and the deployed preview
-  is confirmed to boot and render the genuine ownership gate. What remains
-  unconfirmed is anything that needs a wallet actually holding an eligible NFT:
-  **real-wallet Friend selection through the SDK picker, and behaviour inside a
-  phone wallet browser.** Those two will be exercised and the entry updated during
-  the event. No claim is made about them here.
+- **Holder verification covers selection, not the full loop on a desktop wallet.**
+  A real wallet on Robinhood mainnet passed the ownership gate and selected
+  holder-owned Friend #1969, whose artwork and composed identity match an
+  independent chain read (see above). That session was freshly loaded, so
+  **the buy → capture → echo → redeem loop has not been exercised with a wallet
+  connected** — the automated browser check covers it against the real runtime
+  instead — and **behaviour inside a phone wallet browser is still unconfirmed.**
+  Both will be exercised and the entry updated during the event; no claim is made
+  about them here.
 - **No persistence.** The SDK sandbox has no storage and the bridge has no save
   API, so held phrases and Resonance last one runtime session. The song itself is
   unaffected — it is recomputed from chain data every time.
